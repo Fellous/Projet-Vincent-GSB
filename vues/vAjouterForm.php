@@ -5,12 +5,12 @@ function valider(){
  frm=document.forms['formAjout'];
   // si le prix est positif
   if(frm.elements['prix'].value >0) {
-    // les données sont ok, on peut envoyer le formulaire    
+    // les donnï¿½es sont ok, on peut envoyer le formulaire    
     return true;
   }
   else {
     // sinon on affiche un message
-    alert("Le prix doit être positif !");
+    alert("Le prix doit ï¿½tre positif !");
     // et on indique de ne pas envoyer le formulaire
     return false;
   }
@@ -23,15 +23,15 @@ function valider(){
 
 <form name="formAjout" action="" method="post" onSubmit="return valider()">
   <fieldset>
-    <legend>Entrez les données sur la fleur à ajouter </legend>
-    <label> Référence : </label> <input type="text" placeholder="Entrer la référence …"name="ref" size="10" /><br />
-    <label>Désignation :</label> <input type="text" name="des" size="20" /><br />
+    <legend>Entrez les donnï¿½es sur lvisiteurur ï¿½ ajouter </legend>
+    <label> Rï¿½fï¿½rence : </label> <input type="text" placeholder="Entrer la rï¿½fï¿½rence ï¿½"name="ref" size="10" /><br />
+    <label>Dï¿½signation :</label> <input type="text" name="des" size="20" /><br />
     <label>Prix :</label> <input type="text" name="prix" size="10" /><br />
     <label>Image :</label> <input type="text" name="image" size="20"/><br />    
-    <label>Catégorie :</label>
+    <label>Catï¿½gorie :</label>
     <select name="cat">
        <option selected value = "bul">Bulbes</option>
-       <option value = "mas">Plantes à massif</option>
+       <option value = "mas">Plantes ï¿½ massif</option>
        <option value = "ros">Rosiers</option>
     </select> 
   </fieldset>

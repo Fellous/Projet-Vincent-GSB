@@ -5,6 +5,6 @@
     <h2>voici le projet vincent </h2>
     <img src="images/logoAcceuil.png" />
     <hr>
-    <p>Envoyez des fleurs avec Lafleur.</p>
+    <p>Envoyez des visiteurs avec Lavisiteur.</p>
   </div>
 </div>

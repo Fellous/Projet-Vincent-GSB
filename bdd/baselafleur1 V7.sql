@@ -16,7 +16,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données: `baselafleur1`
+-- Base de données: `baselavisiteur1`
 --
 
 -- --------------------------------------------------------
@@ -69,7 +69,7 @@ INSERT INTO `produit` (`pdt_ref`, `pdt_designation`, `pdt_prix`, `pdt_image`, `p
 ('m03', 'Mélange varié de 10 plantes à massif', '15.00', 'massif_melange', 'mas'),
 ('plm', 'azer', '10.00', 'aa.jpg', 'bul'),
 ('qsd', 'azer', '8.00', 'uuu', 'bul'),
-('r01', '1 pied spécial grandes fleurs', '20.00', 'rosiers_gdefleur', 'ros'),
+('r01', '1 pied spécial grandes visiteurs', '20.00', 'rosiers_gdevisiteur', 'ros'),
 ('r02', 'Une variété sélectionnée pour son parfum', '9.00', 'rosiers_parfum', 'ros'),
 ('r03', 'Rosier arbuste', '8.00', 'rosiers_arbuste', 'ros'),
 ('xcv', '', '5.00', '', 'bul');

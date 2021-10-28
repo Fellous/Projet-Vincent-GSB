@@ -5,12 +5,12 @@ function valider(){
  frm=document.forms['formAjout'];
   // si le prix est positif
   if(frm.elements['prix'].value >0) {
-    // les données sont ok, on peut envoyer le formulaire    
+    // les donnï¿½es sont ok, on peut envoyer le formulaire    
     return true;
   }
   else {
     // sinon on affiche un message
-    alert("Le prix doit être positif !");
+    alert("Le prix doit ï¿½tre positif !");
     // et on indique de ne pas envoyer le formulaire
     return false;
   }
@@ -31,18 +31,18 @@ if (isset($message))
 <div class="container">
   <form action="" method=post>
     <fieldset>
-      <legend>Entrez les données sur la fleur à modifier </legend>
-      <label> Référence :</label>
-      <label><?php echo $lafleur["ref"]; ?> </label>
-      <input type="hidden" name="refFin" value="<?php echo $lafleur["ref"]; ?>" /><br />
-      <label>Désignation :</label>
-      <input type="text" name="designation" value="<?php echo $lafleur["designation"]; ?>" size="20" /><br />
+      <legend>Entrez les donnï¿½es sur lvisiteurur ï¿½ modifier </legend>
+      <label> Rï¿½fï¿½rence :</label>
+      <label><?php echo $lavisiteur["ref"]; ?> </label>
+      <input type="hidden" name="refFin" value="<?php echo $lavisiteur["ref"]; ?>" /><br />
+      <label>Dï¿½signation :</label>
+      <input type="text" name="designation" value="<?php echo $lavisiteur["designation"]; ?>" size="20" /><br />
       <label>Prix :</label>
-      <input type="text" name="prix" value="<?php echo $lafleur["prix"]; ?>" size="10" /><br />
+      <input type="text" name="prix" value="<?php echo $lavisiteur["prix"]; ?>" size="10" /><br />
       <label>Image :</label>
-      <input type="text" name="image" value="<?php echo $lafleur["image"]; ?>" size="20"/><br />
-      <label>Catégorie :</label>
-      <input type="text" name="categorie" value="<?php echo $lafleur["categorie"]; ?>" size="10"/><br />
+      <input type="text" name="image" value="<?php echo $lavisiteur["image"]; ?>" size="20"/><br />
+      <label>Catï¿½gorie :</label>
+      <input type="text" name="categorie" value="<?php echo $lavisiteur["categorie"]; ?>" size="10"/><br />
     </fieldset>
     <button type="submit" class="btn btn-primary">Modifier</button>
     <button type="reset" class="btn">Annuler</button>

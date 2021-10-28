@@ -1,6 +1,6 @@
 <?php
 /** 
- * Script de contrôle et d'affichage du cas d'utilisation "Rechercher"
+ * Script de contrï¿½le et d'affichage du cas d'utilisation "Rechercher"
  * @package default
  * @todo  RAS
  */
@@ -15,13 +15,13 @@
   {
   $cat = $_GET['categ'];
   }  
-  $lafleur = lister($cat);
+  $lavisiteur = lister($cat);
   
   // Construction de la page Rechercher
   // pour l'affichage (appel des vues)
   include($repVues."entete.php") ;
   include($repVues."menu.php") ;
-  include($repVues."vFleurs.php");
+  include($repVues."vvisiteurs.php");
   include($repVues."pied.php") ;
   ?>
     

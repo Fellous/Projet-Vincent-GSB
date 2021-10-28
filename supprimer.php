@@ -23,7 +23,7 @@ else
   if (nbErreurs($tabErreurs)==0)
   {
     $reussite = 1;
-    $messageActionOk = "La fleur a bien �t� supprim�e";
+    $messageActionOk = "La visiteur a bien �t� supprim�e";
   }
 
 }

@@ -16,7 +16,7 @@ function connecterServeurBD()
 {
     $PARAM_hote='localhost'; // le chemin vers le serveur
     $PARAM_port='3306';
-    $PARAM_nom_bd='baseLafleur1'; // le nom de votre base de donn�es
+    $PARAM_nom_bd='baseLavisiteur1'; // le nom de votre base de donn�es
     $PARAM_utilisateur='root'; // nom d'utilisateur pour se connecter
     $PARAM_mot_passe=''; // mot de passe de l'utilisateur pour se connecter
     $connect = new PDO('mysql:host='.$PARAM_hote.';port='.$PARAM_port.';dbname='.$PARAM_nom_bd, $PARAM_utilisateur, $PARAM_mot_passe);
@@ -63,17 +63,17 @@ function lister($categ)
       $ligne = $jeuResultat->fetch();
       while($ligne)
       {
-          $fleur[$i]['image']=$ligne->pdt_image;
-          $fleur[$i]['ref']=$ligne->pdt_ref;
-          $fleur[$i]['designation']=$ligne->pdt_designation;
-          $fleur[$i]['prix']=$ligne->pdt_prix;
+          $visiteur[$i]['image']=$ligne->pdt_image;
+          $visiteur[$i]['ref']=$ligne->pdt_ref;
+          $visiteur[$i]['designation']=$ligne->pdt_designation;
+          $visiteur[$i]['prix']=$ligne->pdt_prix;
           $ligne=$jeuResultat->fetch();
           $i = $i + 1;
       }
   }
   $jeuResultat->closeCursor();   // fermer le jeu de r�sultat
   // deconnecterServeurBD($idConnexion);
-  return $fleur;
+  return $visiteur;
 }
 
 
@@ -115,7 +115,7 @@ function listerUti($type_uti)
 
 function rechercher($des)
 {
-  $fleur=array();
+  $visiteur=array();
   $connexion = connecterServeurBD();
   
   // Si la connexion au SGBD � r�ussi
@@ -131,17 +131,17 @@ echo $requete;
     $ligne = $jeuResultat->fetch();
     while($ligne)
     {
-        $fleur[$i]['image']=$ligne->pdt_image;
-        $fleur[$i]['ref']=$ligne->pdt_ref;
-        $fleur[$i]['designation']=$ligne->pdt_designation;
-        $fleur[$i]['prix']=$ligne->pdt_prix;
+        $visiteur[$i]['image']=$ligne->pdt_image;
+        $visiteur[$i]['ref']=$ligne->pdt_ref;
+        $visiteur[$i]['designation']=$ligne->pdt_designation;
+        $visiteur[$i]['prix']=$ligne->pdt_prix;
         $ligne=$jeuResultat->fetch();
         $i = $i + 1;
     }
 
   $jeuResultat->closeCursor();   // fermer le jeu de r�sultat
   // deconnecterServeurBD($idConnexion);
-  return $fleur;
+  return $visiteur;
 }
 
 
@@ -184,12 +184,12 @@ function ajouter($ref, $des, $prix, $image, $cat,&$tabErr)
         // Si la requ�te a r�ussi
         if ($ok)
         {
-          $message = "La fleur a �t� correctement ajout�e";
+          $message = "La visiteur a �t� correctement ajout�e";
           ajouterErreur($tabErr, $message);
         }
         else
         {
-          $message = "Attention, l'ajout de la fleur a �chou� !!!";
+          $message = "Attention, l'ajout de la visiteur a �chou� !!!";
           ajouterErreur($tabErr, $message);
         } 
 
@@ -347,7 +347,7 @@ function supprimer($ref, &$tabErr)
 {
     $connexion = connecterServeurBD();
     
-    $fleur = array();
+    $visiteur = array();
           
     $requete="delete from produit";
     $requete=$requete." where pdt_ref='".$ref."';";
@@ -358,12 +358,12 @@ function supprimer($ref, &$tabErr)
     // Si la requ�te a r�ussi
     if ($ok)
     {
-      $message = "La fleur a �t� correctement supprim�e";
+      $message = "La visiteur a �t� correctement supprim�e";
       ajouterErreur($tabErr, $message);
     }
     else
     {
-      $message = "Attention, la suppression de la fleur a �chou� !!!";
+      $message = "Attention, la suppression de la visiteur a �chou� !!!";
       ajouterErreur($tabErr, $message);
     }      
 }

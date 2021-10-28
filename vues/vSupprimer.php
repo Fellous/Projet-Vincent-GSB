@@ -4,7 +4,7 @@
 
 <form action="" method=post>
 <fieldset>
-<legend>Entrez la référence de la fleur à supprimer </legend>
+<legend>Entrez la référence de la visiteur à supprimer </legend>
 <label>Référence :</label> <input type="text" name="ref" size="10" />
 </fieldset>
 <button type="submit" class="btn btn-primary">Supprimer</button>
