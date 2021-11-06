@@ -17,7 +17,6 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-  
   </head>
 
   <body data-spy="scroll" data-target=".bs-docs-sidebar">
