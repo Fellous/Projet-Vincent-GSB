@@ -23,9 +23,9 @@ function valider(){
 
 <form name="formAjout" action="" method="post" onSubmit="return valider()">
   <fieldset>
-    <legend>Entrez les donn�es sur lvisiteurur � ajouter </legend>
-    <label> R�f�rence : </label> <input type="text" placeholder="Entrer la r�f�rence �"name="ref" size="10" /><br />
-    <label>D�signation :</label> <input type="text" name="des" size="20" /><br />
+    <legend>Entrez les données sur le visiteurur à ajouter </legend>
+    <label> Référence : </label> <input type="text" placeholder="Entrer la référence �"name="ref" size="10" /><br />
+    <label>Désignation :</label> <input type="text" name="des" size="20" /><br />
     <label>Prix :</label> <input type="text" name="prix" size="10" /><br />
     <label>Image :</label> <input type="text" name="image" size="20"/><br />    
     <label>Cat�gorie :</label>
@@ -37,7 +37,7 @@ function valider(){
   </fieldset>
   <button type="submit" class="btn btn-primary">Enregistrer</button>
   <button type="reset" class="btn">Annuler</button>
-  <p />
+  <p>
 </form>
 </div>
 

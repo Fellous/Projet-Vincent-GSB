@@ -31,22 +31,22 @@ if (isset($message))
 <div class="container">
   <form action="" method=post>
     <fieldset>
-      <legend>Entrez les donn�es sur lvisiteurur � modifier </legend>
-      <label> R�f�rence :</label>
+      <legend>Entrez les données sur le visiteur à modifier </legend>
+      <label> Référence :</label>
       <label><?php echo $lavisiteur["ref"]; ?> </label>
       <input type="hidden" name="refFin" value="<?php echo $lavisiteur["ref"]; ?>" /><br />
-      <label>D�signation :</label>
+      <label>Désignation :</label>
       <input type="text" name="designation" value="<?php echo $lavisiteur["designation"]; ?>" size="20" /><br />
       <label>Prix :</label>
       <input type="text" name="prix" value="<?php echo $lavisiteur["prix"]; ?>" size="10" /><br />
       <label>Image :</label>
       <input type="text" name="image" value="<?php echo $lavisiteur["image"]; ?>" size="20"/><br />
-      <label>Cat�gorie :</label>
+      <label>Catégorie :</label>
       <input type="text" name="categorie" value="<?php echo $lavisiteur["categorie"]; ?>" size="10"/><br />
     </fieldset>
     <button type="submit" class="btn btn-primary">Modifier</button>
     <button type="reset" class="btn">Annuler</button>
-    <p />
+    <p>
   </form> 
 </div>
 
