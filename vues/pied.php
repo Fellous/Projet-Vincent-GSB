@@ -4,7 +4,7 @@
     <footer class="footer">
       <div class="container">
  
-      <p > Appelez notre service commercial au 03.22.84.65.74 pour recevoir un bon de commande</p>
+      <p>Appeler notre chien 07.66.86.69.79</p>
        
       </div>
     </footer>

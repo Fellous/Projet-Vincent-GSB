@@ -18,8 +18,8 @@
       <thead>
         <tr>
           <th>Image</th>
-          <th>R�f�rence</th>
-          <th>Libell�</th>
+          <th>Référence</th>
+          <th>Libellé</th>
           <th>Prix</th>
         </tr>
       </thead>
