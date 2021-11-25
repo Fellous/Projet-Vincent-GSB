@@ -23,17 +23,10 @@ function valider(){
 
 <form name="formAjout" action="" method="post" onSubmit="return valider()">
   <fieldset>
-    <legend>Entrez les données sur le visiteurur à ajouter </legend>
-    <label> Référence : </label> <input type="text" placeholder="Entrer la référence �"name="ref" size="10" /><br />
-    <label>Désignation :</label> <input type="text" name="des" size="20" /><br />
-    <label>Prix :</label> <input type="text" name="prix" size="10" /><br />
-    <label>Image :</label> <input type="text" name="image" size="20"/><br />    
-    <label>Cat�gorie :</label>
-    <select name="cat">
-       <option selected value = "bul">Bulbes</option>
-       <option value = "mas">Plantes � massif</option>
-       <option value = "ros">Rosiers</option>
-    </select> 
+    <legend>Entrez les données sur le visiteur à ajouter </legend>
+    <label>Nom :</label> <input type="text" name="nom" size="10" /><br />
+    <label>Adresse mail :</label> <input type="text" name="mail" size="10" /><br>
+    <label>Mot de passe :</label> <input type="text" name="mdp" size="20" /><br>   
   </fieldset>
   <button type="submit" class="btn btn-primary">Enregistrer</button>
   <button type="reset" class="btn">Annuler</button>

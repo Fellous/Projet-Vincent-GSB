@@ -16,7 +16,7 @@ function connecterServeurBD()
 {
     $PARAM_hote='localhost'; // le chemin vers le serveur
     $PARAM_port='3306';
-    $PARAM_nom_bd='baseLavisiteur1'; // le nom de votre base de donn�es
+    $PARAM_nom_bd='gsbvisiteurs'; // le nom de votre base de donn�es
     $PARAM_utilisateur='root'; // nom d'utilisateur pour se connecter
     $PARAM_mot_passe=''; // mot de passe de l'utilisateur pour se connecter
     $connect = new PDO('mysql:host='.$PARAM_hote.';port='.$PARAM_port.';dbname='.$PARAM_nom_bd, $PARAM_utilisateur, $PARAM_mot_passe);
@@ -146,7 +146,7 @@ echo $requete;
 
 
 
-function ajouter($ref, $des, $prix, $image, $cat,&$tabErr)
+function ajouter($nom, $mail, $mdp, &$tabErr)
 {
   // Ouvrir une connexion au serveur mysql en s'identifiant
   $connexion = connecterServeurBD();
@@ -155,28 +155,26 @@ function ajouter($ref, $des, $prix, $image, $cat,&$tabErr)
   if (TRUE) 
   {
     // V�rifier que la r�f�rence saisie n'existe pas d�ja
-    $requete="select * from produit";
-    $requete=$requete." where pdt_ref = '".$ref."';"; 
+    $requete="select * from visiteur";
+    $requete=$requete." where VIS_NOM = '".$nom."';"; 
     $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
 
-    $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
+    $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le résultat soit récup�rable sous forme d'objet     
     
     $ligne = $jeuResultat->fetch();
     if($ligne)
     {
-      $message="Echec de l'ajout : la r�f�rence existe d�j� !";
+      $message="Echec de l'ajout : la référence existe déja !";
       ajouterErreur($tabErr, $message);
     }
     else
     {
-      // Cr�er la requ�te d'ajout 
-       $requete="insert into produit"
-       ."(pdt_ref,pdt_designation,pdt_prix,pdt_image, pdt_categorie) values ('"
-       .$ref."','"
-       .$des."',"
-       .$prix.",'"
-       .$image."','"
-       .$cat."');";
+      // Créer la requ�te d'ajout 
+       $requete="insert into visiteur"
+       ."(Vis_id, VIS_NOM, VIS_MDP, Vis_mail) values ('"
+       .$nom."','"
+       .$mail."','"
+       .$mdp."');";
        
         // Lancer la requ�te d'ajout 
         $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
@@ -184,12 +182,12 @@ function ajouter($ref, $des, $prix, $image, $cat,&$tabErr)
         // Si la requ�te a r�ussi
         if ($ok)
         {
-          $message = "La visiteur a �t� correctement ajout�e";
+          $message = "La visiteur a été correctement ajoutée";
           ajouterErreur($tabErr, $message);
         }
         else
         {
-          $message = "Attention, l'ajout de la visiteur a �chou� !!!";
+          $message = "Attention, l'ajout de la visiteur a échoué !!!";
           ajouterErreur($tabErr, $message);
         } 
 
@@ -199,7 +197,7 @@ function ajouter($ref, $des, $prix, $image, $cat,&$tabErr)
   }
   else
   {
-    $message = "probl�me � la connexion <br />";
+    $message = "problème à la connexion <br />";
     ajouterErreur($tabErr, $message);
   }
 }
@@ -343,14 +341,14 @@ function modifierUti($unId,$unNom,$unMdp,$unMdpVerif,$unCat ,&$tabErr)
 
 
 
-function supprimer($ref, &$tabErr)
+function supprimer($id, &$tabErr)
 {
     $connexion = connecterServeurBD();
     
     $visiteur = array();
           
-    $requete="delete from produit";
-    $requete=$requete." where pdt_ref='".$ref."';";
+    $requete="delete from visiteur";
+    $requete=$requete." where Vis_id='".$id."';";
     
     // Lancer la requ�te supprimer
     $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
@@ -358,12 +356,12 @@ function supprimer($ref, &$tabErr)
     // Si la requ�te a r�ussi
     if ($ok)
     {
-      $message = "La visiteur a �t� correctement supprim�e";
+      $message = "La visiteur a été correctement supprimée";
       ajouterErreur($tabErr, $message);
     }
     else
     {
-      $message = "Attention, la suppression de la visiteur a �chou� !!!";
+      $message = "Attention, la suppression de la visiteur a échoué !!!";
       ajouterErreur($tabErr, $message);
     }      
 }

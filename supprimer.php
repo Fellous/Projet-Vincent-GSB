@@ -18,8 +18,8 @@ if (count($_POST)==0)
 else
 {
   $etape = 2;  
-  $uneref=$_POST["ref"];
-  supprimer($uneref, $tabErreurs);
+  $unId=$_POST["id"];
+  supprimer($unId, $tabErreurs);
   if (nbErreurs($tabErreurs)==0)
   {
     $reussite = 1;

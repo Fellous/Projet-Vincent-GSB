@@ -1,6 +1,6 @@
 <?php
 /** 
- * Script de contrôle et d'affichage du cas d'utilisation "Ajouter"
+ * Script de contrï¿½le et d'affichage du cas d'utilisation "Ajouter"
  * @package default
  * @todo  RAS
  */
@@ -10,11 +10,9 @@ $repVues = './vues/';
 
 require($repInclude . "_init.inc.php");
   
-$uneRef=lireDonneePost("ref", "");
-$uneDes=lireDonneePost("des", "");
-$unPrix=lireDonneePost("prix", "");
-$uneImage=lireDonneePost("image", "");
-$uneCat=lireDonneePost("cat", "");
+$unNom=lireDonneePost("nom", "");
+$unMail=lireDonneePost("mail", "");
+$unMdp=lireDonneePost("mdp", "");
 
 if (count($_POST)==0)
 {
@@ -23,7 +21,7 @@ if (count($_POST)==0)
 else
 {
   $etape = 2;
-  ajouter($uneRef, $uneDes, $unPrix, $uneImage, $uneCat,$tabErreurs);
+  ajouter($unNom, $unMail , $unMdp, $tabErreurs);
 }
 
 // Construction de la page Rechercher
