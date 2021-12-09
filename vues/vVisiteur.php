@@ -29,9 +29,9 @@
     { 
  ?>     
         <tr>
-            <td><?php echo $levisiteur[$i]["idVisiteur"]?></td>
+            <td><?php echo $levisiteur[$i]["Vis_id"]?></td>
             <td><?php echo $levisiteur[$i]["VIS_NOM"]?></td>
-            <td><?php echo $levisiteur[$i]["mail"]?></td>
+            <td><?php echo $levisiteur[$i]["Vis_mail"]?></td>
         </tr>
 <?php
         $i = $i + 1;

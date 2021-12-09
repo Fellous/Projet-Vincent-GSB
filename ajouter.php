@@ -10,10 +10,19 @@ $repVues = './vues/';
 
 require($repInclude . "_init.inc.php");
   
-$unNom=lireDonneePost("nom", "");
-$unMail=lireDonneePost("mail", "");
-// $unMdp=lireDonneePost("mdp", "");
+// $unNom=lireDonneePost("nom", "");
+// $unMail=lireDonneePost("mail", "");
+// // $unMdp=lireDonneePost("mdp", "");
 
+// if (count($_POST)==0)
+// {
+//   $etape = 1;
+// }
+// else
+// {
+//   $etape = 2;
+//   ajouter($unNom, $unMail ,  $tabErreurs);
+// }
 if (count($_POST)==0)
 {
   $etape = 1;
@@ -21,7 +30,10 @@ if (count($_POST)==0)
 else
 {
   $etape = 2;
-  ajouter($unNom, $unMail ,  $tabErreurs);
+   $unNom=$_POST["nom"];
+   $unMail=$_POST["mail"];
+    
+  ajouter($unNom, $unMail,$tabErreurs);
 }
 
 // Construction de la page Rechercher

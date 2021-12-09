@@ -67,9 +67,9 @@ function lister($idVisiteur)
       $ligne = $jeuResultat->fetch();
       while($ligne)
       {
-          $levisiteur[$i]['idVisiteur']=$ligne->idVisiteur;
+          $levisiteur[$i]['Vis_id']=$ligne->Vis_id;
           $levisiteur[$i]['VIS_NOM']=$ligne->VIS_NOM;
-          $levisiteur[$i]['mail']=$ligne->mail;
+          $levisiteur[$i]['Vis_mail']=$ligne->Vis_mail;
           $ligne=$jeuResultat->fetch();
           $i = $i + 1;
       }
@@ -193,8 +193,9 @@ function ajouter($nom, $mail, &$tabErr)
   if (TRUE) 
   {
     // V�rifier que la r�f�rence saisie n'existe pas d�ja
-    $requete="select * from gsbvisiteurs";
-    $requete=$requete." where VIS_NOM = '".$nom."';"; 
+    $requete="select * from visiteur";
+    $requete=$requete." where Vis_mail = '".$mail."';"; 
+    echo $requete;
     $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
 
     $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le résultat soit récup�rable sous forme d'objet     
@@ -209,9 +210,10 @@ function ajouter($nom, $mail, &$tabErr)
     {
       // Créer la requ�te d'ajout 
        $requete="insert into visiteur"
-       ."( VIS_NOM,  Vis_mail) values ('"
+       ."(VIS_NOM,Vis_mail) values ('"
        .$nom."','"
-       .$mail."'');";
+       .$mail."');";
+       echo $requete;
        
         // Lancer la requ�te d'ajout 
         $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
@@ -219,12 +221,12 @@ function ajouter($nom, $mail, &$tabErr)
         // Si la requ�te a r�ussi
         if ($ok)
         {
-          $message = "La visiteur a été correctement ajoutée";
+          $message = "Le visiteur a été correctement ajoutée";
           ajouterErreur($tabErr, $message);
         }
         else
         {
-          $message = "Attention, l'ajout de la visiteur a échoué !!!";
+          $message = "Attention, l'ajout de le visiteur a échoué !!!";
           ajouterErreur($tabErr, $message);
         } 
 
@@ -241,65 +243,65 @@ function ajouter($nom, $mail, &$tabErr)
 
 
 
-function ajouterUti($unId,$unNom,$unMdp,$unMdpVerif,$unCat,&$tabErr)
-{
+// function ajouterUti($unId,$unNom,$unMdp,$unMdpVerif,$unCat,&$tabErr)
+// {
 
-    // Ouvrir une connexion au serveur mysql en s'identifiant
-  $connexion = connecterServeurBD();
+//     // Ouvrir une connexion au serveur mysql en s'identifiant
+//   $connexion = connecterServeurBD();
   
-  // Si la connexion au SGBD � r�ussi
-  if (TRUE) 
-  {
-    if ($unMdpVerif==$unMdp)
-    {
-              $requete="select * from utilisateur";
-            $requete=$requete." where id = '".$unId."';"; 
-            $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+//   // Si la connexion au SGBD � r�ussi
+//   if (TRUE) 
+//   {
+//     if ($unMdpVerif==$unMdp)
+//     {
+//               $requete="select * from utilisateur";
+//             $requete=$requete." where id = '".$unId."';"; 
+//             $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
 
-            $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
+//             $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
             
-            $ligne = $jeuResultat->fetch();
-            if($ligne)
-            {
-              $message="Echec de l'ajout : l ID existe déja !";
-              ajouterErreur($tabErr, $message);
-            }
-            else
-            {
-              // Cr�er la requ�te d'ajout 
-              $requete="insert into utilisateur"
-              ."(id,nom,mdp,cat) values ('"
-              .$unId."','"
-              .$unNom."',"
-              .$unMdp.",'"
-              .$unCat."');";
+//             $ligne = $jeuResultat->fetch();
+//             if($ligne)
+//             {
+//               $message="Echec de l'ajout : l ID existe déja !";
+//               ajouterErreur($tabErr, $message);
+//             }
+//             else
+//             {
+//               // Cr�er la requ�te d'ajout 
+//               $requete="insert into utilisateur"
+//               ."(id,nom,mdp,cat) values ('"
+//               .$unId."','"
+//               .$unNom."',"
+//               .$unMdp.",'"
+//               .$unCat."');";
               
-                // Lancer la requ�te d'ajout 
-                $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+//                 // Lancer la requ�te d'ajout 
+//                 $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
               
-                // Si la requ�te a r�ussi
-                if ($ok)
-                {
-                  $message = "l utilisateur a �t� correctement ajout�e";
-                  ajouterErreur($tabErr, $message);
-                }
-                else
-                {
-                  $message = "Attention, l'ajout de l uti a �chou� !!!";
-                  ajouterErreur($tabErr, $message);
-                } 
+//                 // Si la requ�te a r�ussi
+//                 if ($ok)
+//                 {
+//                   $message = "l utilisateur a �t� correctement ajout�e";
+//                   ajouterErreur($tabErr, $message);
+//                 }
+//                 else
+//                 {
+//                   $message = "Attention, l'ajout de l uti a �chou� !!!";
+//                   ajouterErreur($tabErr, $message);
+//                 } 
 
-            }
-            // fermer la connexion
-            // deconnecterServeurBD($idConnexion);
-          }
-          else
-    {
-      $message = "les mdp sont diferents !!!!!! <br />";
-    ajouterErreur($tabErr, $message);
-    }
-        }
-    }
+//             }
+//             // fermer la connexion
+//             // deconnecterServeurBD($idConnexion);
+//           }
+//           else
+//     {
+//       $message = "les mdp sont diferents !!!!!! <br />";
+//     ajouterErreur($tabErr, $message);
+//     }
+//         }
+//     }
    
     // V�rifier que la r�f�rence saisie n'existe pas d�ja
 
