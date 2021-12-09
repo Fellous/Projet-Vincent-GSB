@@ -25,8 +25,12 @@ function valider(){
   <fieldset>
     <legend>Entrez les données sur le visiteur à ajouter </legend>
     <label>Nom :</label> <input type="text" name="nom" size="10" /><br />
+    <label>Prenom :</label> <input type="text" name="nom" size="10" /><br />
+    <label>Adresse  :</label> <input type="text" name="nom" size="10" /><br />
+    <label>Code Postal :</label> <input type="text" name="nom" size="10" /><br />
+    <label>ville :</label> <input type="text" name="nom" size="10" /><br />
     <label>Adresse mail :</label> <input type="text" name="mail" size="10" /><br>
-    <label>Mot de passe :</label> <input type="text" name="mdp" size="20" /><br>   
+    <!-- <label>Mot de passe :</label> <input type="text" name="mdp" size="20" /><br>    -->
   </fieldset>
   <button type="submit" class="btn btn-primary">Enregistrer</button>
   <button type="reset" class="btn">Annuler</button>
