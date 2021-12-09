@@ -22,6 +22,8 @@
                       <li><a href="lister.php">Lister</a></li>
                       <li><a href="ajouter.php">Ajouter</a></li>
                       <li><a href="supprimer.php">Supprimer</a></li>
+                      <li><a href="rechercher.php">Rechercher</a></li>
+                      <li><a href="modifier.php">Modifier</a></li>
                   </ul>
               </li>
 <!--                                          

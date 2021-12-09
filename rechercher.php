@@ -10,9 +10,11 @@ $repVues = './vues/';
 
 require($repInclude . "_init.inc.php");
   
-$unNom=lireDonneePost("nom", "");
-$unMail=lireDonneePost("mail", "");
-// $unMdp=lireDonneePost("mdp", "");
+// $uneRef=lireDonneePost("ref", "");
+//$uneDes=lireDonneePost("des", "");
+//$unPrix=lireDonneePost("prix", "");
+//$uneImage=lireDonneePost("image", "");
+//$uneCat=lireDonneePost("cat", "");
 
 if (count($_POST)==0)
 {
@@ -21,7 +23,8 @@ if (count($_POST)==0)
 else
 {
   $etape = 2;
-  ajouter($unNom, $unMail ,  $tabErreurs);
+   $uneDes=$_POST["des"];
+   $lafleur=rechercher($uneDes);
 }
 
 // Construction de la page Rechercher
@@ -29,7 +32,14 @@ else
 include($repVues."entete.php") ;
 include($repVues."menu.php") ;
 include($repVues ."erreur.php");
-include($repVues."vAjouterForm.php") ;
+if ($etape ==1)
+{
+ include($repVues."vRechercherForm.php") ; 
+}
+else
+{
+ include($repVues."vFleurs.php") ; 
+}
 include($repVues."pied.php") ;
 ?>
   

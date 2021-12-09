@@ -10,18 +10,18 @@
   
   require($repInclude . "_init.inc.php");
  
-  $cat="";
-  if (isset($_GET['categ']))
+  $idVisiteur="";
+  if (isset($_GET['idVisiteur']))
   {
-  $cat = $_GET['categ'];
+  $idVisiteur = $_GET['idVisiteur'];
   }  
-  $lavisiteur = lister($cat);
+  $levisiteur = lister($idVisiteur);
   
   // Construction de la page Rechercher
   // pour l'affichage (appel des vues)
   include($repVues."entete.php") ;
   include($repVues."menu.php") ;
-  include($repVues."vvisiteurs.php");
+  include($repVues."vVisiteur.php");
   include($repVues."pied.php") ;
   ?>
     

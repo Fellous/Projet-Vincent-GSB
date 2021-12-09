@@ -41,7 +41,11 @@ function deconnecterServeurBD($idCnx) {
 }
 
 
-function lister($categ)
+
+
+
+
+function lister($idVisiteur)
 {
   $connexion = connecterServeurBD();
   
@@ -50,10 +54,10 @@ function lister($categ)
   {
       
            
-      $requete="select * from produit";
-      if ($categ!="")
+      $requete="select * from visiteur";
+      if ($idVisiteur!="")
       {
-          $requete=$requete." where pdt_categorie='".$categ."';";
+          $requete=$requete." where idVisiteur='".$idVisiteur."';";
       }
       
       $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
@@ -63,18 +67,52 @@ function lister($categ)
       $ligne = $jeuResultat->fetch();
       while($ligne)
       {
-          $visiteur[$i]['image']=$ligne->pdt_image;
-          $visiteur[$i]['ref']=$ligne->pdt_ref;
-          $visiteur[$i]['designation']=$ligne->pdt_designation;
-          $visiteur[$i]['prix']=$ligne->pdt_prix;
+          $levisiteur[$i]['idVisiteur']=$ligne->idVisiteur;
+          $levisiteur[$i]['VIS_NOM']=$ligne->VIS_NOM;
+          $levisiteur[$i]['mail']=$ligne->mail;
           $ligne=$jeuResultat->fetch();
           $i = $i + 1;
       }
   }
   $jeuResultat->closeCursor();   // fermer le jeu de r�sultat
   // deconnecterServeurBD($idConnexion);
-  return $visiteur;
+  return $levisiteur;
 }
+
+// function lister($categ)
+// {
+//   $connexion = connecterServeurBD();
+  
+//   // Si la connexion au SGBD � r�ussi
+//   if (TRUE) 
+//   {
+      
+           
+//       $requete="select * from produit";
+//       if ($categ!="")
+//       {
+//           $requete=$requete." where pdt_categorie='".$categ."';";
+//       }
+      
+//       $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+
+//       $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
+//       $i = 0;
+//       $ligne = $jeuResultat->fetch();
+//       while($ligne)
+//       {
+//           $visiteur[$i]['image']=$ligne->pdt_image;
+//           $visiteur[$i]['ref']=$ligne->pdt_ref;
+//           $visiteur[$i]['designation']=$ligne->pdt_designation;
+//           $visiteur[$i]['prix']=$ligne->pdt_prix;
+//           $ligne=$jeuResultat->fetch();
+//           $i = $i + 1;
+//       }
+//   }
+//   $jeuResultat->closeCursor();   // fermer le jeu de r�sultat
+//   // deconnecterServeurBD($idConnexion);
+//   return $visiteur;
+// }
 
 
 function listerUti($type_uti)
@@ -146,7 +184,7 @@ echo $requete;
 
 
 
-function ajouter($nom, $mail, $mdp, &$tabErr)
+function ajouter($nom, $mail, &$tabErr)
 {
   // Ouvrir une connexion au serveur mysql en s'identifiant
   $connexion = connecterServeurBD();
@@ -155,7 +193,7 @@ function ajouter($nom, $mail, $mdp, &$tabErr)
   if (TRUE) 
   {
     // V�rifier que la r�f�rence saisie n'existe pas d�ja
-    $requete="select * from visiteur";
+    $requete="select * from gsbvisiteurs";
     $requete=$requete." where VIS_NOM = '".$nom."';"; 
     $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
 
@@ -171,10 +209,9 @@ function ajouter($nom, $mail, $mdp, &$tabErr)
     {
       // Créer la requ�te d'ajout 
        $requete="insert into visiteur"
-       ."(Vis_id, VIS_NOM, VIS_MDP, Vis_mail) values ('"
+       ."( VIS_NOM,  Vis_mail) values ('"
        .$nom."','"
-       .$mail."','"
-       .$mdp."');";
+       .$mail."'');";
        
         // Lancer la requ�te d'ajout 
         $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
