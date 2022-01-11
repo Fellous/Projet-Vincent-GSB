@@ -78,6 +78,37 @@ function lister($idVisiteur)
   // deconnecterServeurBD($idConnexion);
   return $levisiteur;
 }
+function listerMD($idMateriel)
+{
+  $connexion = connecterServeurBD();
+  // Si la connexion au SGBD � r�ussi
+  if (TRUE) 
+  {
+      
+           
+      $requete="SELECT m.marque , m.modele , m.dimensionLongueur
+      FROM materiel m WHERE m.id NOT IN (SELECT e.id FROM emprunt e where e.Date_Fin_Empr is null);";
+     
+      
+      $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+
+      $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
+      $i = 0;
+      $ligne = $jeuResultat->fetch();
+      while($ligne)
+      {
+          $leMaterielD[$i]['marque']=$ligne->marque;
+          $leMaterielD[$i]['modele']=$ligne->modele;
+          $leMaterielD[$i]['dimensionLongueur']=$ligne->dimensionLongueur;
+          $ligne=$jeuResultat->fetch();
+          $i = $i + 1;
+      }
+  }
+  $jeuResultat->closeCursor();   // fermer le jeu de r�sultat
+  // deconnecterServeurBD($idConnexion);
+  return $leMaterielD;
+
+}
 
 // function lister($categ)
 // {
@@ -151,17 +182,17 @@ function listerUti($type_uti)
 }
 
 
-function rechercher($des)
+function rechercher($unNom, $unMail)
 {
-  $visiteur=array();
+  $levisiteur=array();
   $connexion = connecterServeurBD();
   
   // Si la connexion au SGBD � r�ussi
       
            
-    $requete="select * from produit";
-    $requete=$requete." where pdt_designation='".$des."';";
-echo $requete;    
+    $requete="select * from visiteur";
+    $requete=$requete." where Vis_mail='".$unMail."';";
+    //echo $requete;    
     $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
 
     $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
@@ -169,17 +200,48 @@ echo $requete;
     $ligne = $jeuResultat->fetch();
     while($ligne)
     {
-        $visiteur[$i]['image']=$ligne->pdt_image;
-        $visiteur[$i]['ref']=$ligne->pdt_ref;
-        $visiteur[$i]['designation']=$ligne->pdt_designation;
-        $visiteur[$i]['prix']=$ligne->pdt_prix;
+        $levisiteur[$i]['VIS_NOM']=$ligne->VIS_NOM;
+        $levisiteur[$i]['Vis_mail']=$ligne->Vis_mail;
         $ligne=$jeuResultat->fetch();
         $i = $i + 1;
     }
 
   $jeuResultat->closeCursor();   // fermer le jeu de r�sultat
   // deconnecterServeurBD($idConnexion);
-  return $visiteur;
+  return $levisiteur;
+  }
+  function recherchera($idVisiteur)
+{
+$connexion = connecterServeurBD();
+  
+  // Si la connexion au SGBD � r�ussi
+  if (TRUE) 
+  {
+      
+           
+      $requete="select * from visiteur";
+      if ($idVisiteur!="")
+      {
+          $requete=$requete." where Vis_id='".$idVisiteur."';";
+      }
+      
+      $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+
+      $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
+      $i = 0;
+      $ligne = $jeuResultat->fetch();
+      while($ligne)
+      {
+          $levisiteur[$i]['Vis_id']=$ligne->Vis_id;
+          $levisiteur[$i]['VIS_NOM']=$ligne->VIS_NOM;
+          $levisiteur[$i]['Vis_mail']=$ligne->Vis_mail;
+          $ligne=$jeuResultat->fetch();
+          $i = $i + 1;
+      }
+  }
+  $jeuResultat->closeCursor();   // fermer le jeu de r�sultat
+  // deconnecterServeurBD($idConnexion);
+  return $levisiteur;
 }
 
 

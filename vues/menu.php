@@ -29,8 +29,8 @@
               <li class="dropdown">
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">Matériel <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                      <li><a href="listerM.php">Lister</a></li>
-                      <li><a href="ajouterM.php">Ajouter</a></li>
+                      <li><a href="listerMaterielDispo.php">Liste disponible</a></li>
+                      <li><a href="ajouterMateriel.php">Ajouter</a></li>
                       <li><a href="supprimerM.php">Supprimer</a></li>
                       <li><a href="rechercherM.php">Rechercher</a></li>
                       <li><a href="modifierM.php">Modifier</a></li>

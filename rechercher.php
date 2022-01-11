@@ -9,6 +9,13 @@ $repInclude = './include/';
 $repVues = './vues/';
 
 require($repInclude . "_init.inc.php");
+
+$idVisiteur="";
+if (isset($_GET['Vis_id']))
+{
+$idVisiteur = $_GET['Vis_id'];
+}  
+$levisiteur = recherchera($idVisiteur);
   
 // $uneRef=lireDonneePost("ref", "");
 //$uneDes=lireDonneePost("des", "");
@@ -23,8 +30,9 @@ if (count($_POST)==0)
 else
 {
   $etape = 2;
-   $uneDes=$_POST["des"];
-   $lafleur=rechercher($uneDes);
+   $unNom=$_POST["VIS_NOM"];
+   $unMail=$_POST["Vis_mail"];
+   $levisiteur=rechercher($unNom, $unMail);
 }
 
 // Construction de la page Rechercher

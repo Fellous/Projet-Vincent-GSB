@@ -4,13 +4,13 @@
 function valider(){
  frm=document.forms['formAjout'];
   // si le prix est positif
-  if(frm.elements['prix'].value >0) {
+  if(frm.elements['dimensionL'].value >0) {
     // les donn�es sont ok, on peut envoyer le formulaire    
     return true;
   }
   else {
     // sinon on affiche un message
-    alert("Le prix doit étre positif !");
+    alert("La dimension doit étre positif !");
     // et on indique de ne pas envoyer le formulaire
     return false;
   }
@@ -24,12 +24,9 @@ function valider(){
 <form name="formAjout" action="" method="post" onSubmit="return valider()">
   <fieldset>
     <legend>Entrez les données sur le visiteur à ajouter </legend>
-    <label>Nom :</label> <input type="text" name="nom" size="10" /><br />
-    <!-- <label>Prenom :</label> <input type="text" name="nom" size="10" /><br /> -->
-    <!-- <label>Adresse  :</label> <input type="text" name="nom" size="10" /><br /> -->
-    <!-- <label>Code Postal :</label> <input type="text" name="nom" size="10" /><br /> -->
-    <!-- <label>ville :</label> <input type="text" name="nom" size="10" /><br /> -->
-    <label>Adresse mail :</label> <input type="text" name="mail" size="10" /><br>
+    <label>Marque :</label> <input type="text" name="marque" size="10" /><br />
+    <label>Model :</label> <input type="text" name="model" size="10" /><br>
+    <label>Dimension Longueur :</label> <input type="text" name="dimensionL" size="10" /><br>
     <!-- <label>Mot de passe :</label> <input type="text" name="mdp" size="20" /><br>    -->
   </fieldset>
   <button type="submit" class="btn btn-primary">Enregistrer</button>
