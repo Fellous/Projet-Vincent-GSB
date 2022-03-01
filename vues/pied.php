@@ -4,7 +4,7 @@
     <footer class="footer">
       <div class="container">
  
-      <p>Appeler notre chien 07.66.86.69.79</p>
+      <p>appeller le sercvice technique 06.95.13.13.63</p>
        
       </div>
     </footer>

@@ -87,7 +87,8 @@ function listerMD($idMateriel)
       
            
       $requete="SELECT m.marque , m.modele , m.dimensionLongueur
-      FROM materiel m WHERE m.id NOT IN (SELECT e.id FROM emprunt e where e.Date_Fin_Empr is null);";
+      FROM materiel m WHERE m.id  NOT IN (SELECT e.id FROM emprunt e where e.Date_Fin_Empr is null )
+      or m.id not in(SELECT emprunt.id FROM emprunt) ;";
      
       
       $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
@@ -108,6 +109,68 @@ function listerMD($idMateriel)
   // deconnecterServeurBD($idConnexion);
   return $leMaterielD;
 
+}
+
+
+function emprunter($idVis, $RefMat,$DateEmprunt, &$tabErr)
+{
+  // Ouvrir une connexion au serveur mysql en s'identifiant
+  $connexion = connecterServeurBD();
+  
+  // Si la connexion au SGBD � r�ussi
+  if (TRUE) 
+  {
+    // V�rifier que la r�f�rence saisie n'existe pas d�ja
+   
+    $requete="SELECT m.marque , m.modele , m.dimensionLongueur
+    FROM materiel m
+     where ".$RefMat." NOT IN (SELECT e.id FROM emprunt e where e.Date_Fin_Empr is null )
+    or m.id not in(SELECT emprunt.id FROM emprunt);"; 
+    echo $requete;
+    $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+
+    $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le résultat soit récup�rable sous forme d'objet     
+    
+    $ligne = $jeuResultat->fetch();
+    if($ligne)
+    {
+      // // Créer la requ�te d'ajout 
+      // $requete="insert into visiteur"
+      // ."(VIS_NOM,Vis_mail) values ('"
+      // .$nom."','"
+      // .$mail."');";
+      // echo $requete;
+      
+      //   // Lancer la requ�te d'ajout 
+      //   $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+      
+      //   // Si la requ�te a r�ussi
+      //   if ($ok)
+      //   {
+          $message = "Le visiteur a été correctement ajoutée";
+          ajouterErreur($tabErr, $message);
+        // }
+        // else
+        // {
+        //   $message = "Attention, l'ajout de le visiteur a échoué !!!";
+        //   ajouterErreur($tabErr, $message);
+        // } 
+    }
+    else
+    {
+      
+        $message="Echec de l'emprunt : le matériel est deja emprunter ";
+        ajouterErreur($tabErr, $message);
+
+    }
+    // fermer la connexion
+    // deconnecterServeurBD($idConnexion);
+  }
+  else
+  {
+    $message = "problème à la connexion <br />";
+    ajouterErreur($tabErr, $message);
+  }
 }
 
 // function lister($categ)
