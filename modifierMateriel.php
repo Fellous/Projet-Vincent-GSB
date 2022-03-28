@@ -28,14 +28,10 @@ else
 {
     $etape = 2;
     $uneRef=$_POST["ref"];
-    $unNom=$_POST["nom"];
-    $unPrenom=$_POST["prenom"];
-    $uneAdresse=$_POST["adresse"];
-    $uneCP=$_POST["cp"];
-    $uneville=$_POST["ville"];
-    $unsec_code=$_POST["sec_code"];
-    $unlab_code=$_POST["lab_code"];
-    modifierUti($uneRef, $unNom, $unPrenom, $uneAdresse, $uneCP, $uneville, $unsec_code, $unlab_code,$tabErreurs);
+    $uneMarque=$_POST["marque"];
+    $uneDimension=$_POST["dimension"];
+    $unModele=$_POST["modele"];
+    modifierMaterielle($uneRef, $uneMarque, $uneDimension, $unModele,$tabErreurs);
     // Message de r�ussite pour l'affichage
     if (nbErreurs($tabErreurs)==0)
     {
@@ -53,7 +49,7 @@ include($repVues ."erreur.php");
 
 if($etape==1)
 {
-   include($repVues."vModifierFormVisiteur.php");
+   include($repVues."vModifierFormMaterielle.php");
 }
 include($repVues."pied.php") ;
 ?>

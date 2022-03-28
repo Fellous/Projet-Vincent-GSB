@@ -116,97 +116,215 @@ function emprunter($idVis, $RefMat,$DateEmprunt, &$tabErr)
 {
   // Ouvrir une connexion au serveur mysql en s'identifiant
   $connexion = connecterServeurBD();
-  
-  // Si la connexion au SGBD � r�ussi
-  if (TRUE) 
-  {
-    // V�rifier que la r�f�rence saisie n'existe pas d�ja
-   
-    $requete="SELECT m.marque , m.modele , m.dimensionLongueur
-    FROM materiel m
-     where ".$RefMat." NOT IN (SELECT e.id FROM emprunt e where e.Date_Fin_Empr is null )
-    or m.id not in(SELECT emprunt.id FROM emprunt);"; 
-    echo $requete;
-    $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
 
-    $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le résultat soit récup�rable sous forme d'objet     
-    
-    $ligne = $jeuResultat->fetch();
-    if($ligne)
-    {
-      // // Créer la requ�te d'ajout 
-      // $requete="insert into visiteur"
-      // ."(VIS_NOM,Vis_mail) values ('"
-      // .$nom."','"
-      // .$mail."');";
-      // echo $requete;
-      
-      //   // Lancer la requ�te d'ajout 
-      //   $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
-      
-      //   // Si la requ�te a r�ussi
-      //   if ($ok)
-      //   {
-          $message = "Le visiteur a été correctement ajoutée";
-          ajouterErreur($tabErr, $message);
-        // }
-        // else
-        // {
-        //   $message = "Attention, l'ajout de le visiteur a échoué !!!";
-        //   ajouterErreur($tabErr, $message);
-        // } 
+ 
+  $requete="select * from emprunt";
+  $requete=$requete." where id = '".$RefMat."';";   
+  // Cr�er la requ�te d'ajout 
+  $requete="insert into emprunt"
+  ."(Vis_id, id, Date_Deb_Empr) values ('"
+  .$idVis."','"
+  .$RefMat."','"
+  .$DateEmprunt."');";
+  
+  // Lancer la requ�te d'ajout 
+  $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+  
+  // Si la requ�te a r�ussi
+  if ($ok)
+  {
+    $message = "L'emprunt a �t� correctement ajout�e";
+    ajouterErreur($tabErr, $message);
     }
+  else
+  {
+    $message = "Attention, l'ajout de l'emprunt a �chou� !!!";
+    ajouterErreur($tabErr, $message);
+  } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // version pour verifier existance de l empreunt
+  
+                            // // Si la connexion au SGBD � r�ussi
+                            // if (TRUE) 
+                            // {
+                            //   // V�rifier que la r�f�rence saisie n'existe pas d�ja
+                            
+                            //   $requete="SELECT m.marque , m.modele , m.dimensionLongueur
+                            //   FROM materiel m
+                            //   where ".$RefMat." NOT IN (SELECT e.id FROM emprunt e where e.Date_Fin_Empr is null )
+                            //   or m.id not in(SELECT emprunt.id FROM emprunt);"; 
+                            //   echo $requete;
+                            //   $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+
+                            //   $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le résultat soit récup�rable sous forme d'objet     
+                              
+                            //   $ligne = $jeuResultat->fetch();
+                            //   if($ligne)
+                            //   {
+                                
+                            //         $message = "Le visiteur a été correctement ajoutée";
+                            //         ajouterErreur($tabErr, $message);
+                              
+                            //   }
+                            //   else
+                            //   {
+                                
+                            //       $message="Echec de l'emprunt : le matériel est deja emprunter ";
+                            //       ajouterErreur($tabErr, $message);
+
+                            //   }
+                            //   // fermer la connexion
+                            //   // deconnecterServeurBD($idConnexion);
+                            // }
+                            // else
+                            // {
+                            //   $message = "problème à la connexion <br />";
+                            //   ajouterErreur($tabErr, $message);
+                            // }
+}
+
+function restituer($idVis, $RefMat,$DateResti, &$tabErr)
+{
+  // Ouvrir une connexion au serveur mysql en s'identifiant
+  $connexion = connecterServeurBD();
+
+  
+  $requete="select Vis_id, id from emprunt";
+  $requete=$requete." where Vis_id = '".$idVis."' and id = '".$RefMat."' and Date_Fin_Empr is null;";   
+  // Cr�er la requ�te d'ajout 
+
+  $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+
+  $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le résultat soit récup�rable sous forme d'objet     
+  
+  // // // V�rifier que la r�f�rence saisie n'existe pas d�ja
+  // $requete="select * from visiteur";
+  // $requete=$requete." where Vis_mail = '".$mail."';"; 
+  // // echo $requete;
+  // $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+
+  // $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le résultat soit récup�rable sous forme d'objet     
+  
+  // $ligne = $jeuResultat->fetch();
+
+
+
+
+  $ligne = $jeuResultat->fetch();
+  if($ligne)
+  {
+    $requete="update emprunt"
+    ." set Date_Fin_Empr ='"
+    .$DateResti."'
+    where id = '".$RefMat."'
+    and Vis_id = '".$idVis."';";   
+    
+    // Lancer la requ�te d'ajout 
+    $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+    
+    // Si la requ�te a r�ussi
+    if ($ok)
+    {
+      $message = "La réstitution a correctement été appliqué ";
+      ajouterErreur($tabErr, $message);
+      }
     else
     {
-      
-        $message="Echec de l'emprunt : le matériel est deja emprunter ";
-        ajouterErreur($tabErr, $message);
-
-    }
-    // fermer la connexion
-    // deconnecterServeurBD($idConnexion);
+      $message = "Attention, la restitution a échoué!!!";
+      ajouterErreur($tabErr, $message);
+    } 
+    
   }
   else
   {
-    $message = "problème à la connexion <br />";
+    
+    $message="Attention, la restitution a échoué!!!";
     ajouterErreur($tabErr, $message);
   }
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // version pour verifier existance de l empreunt
+  
+                            // // Si la connexion au SGBD � r�ussi
+                            // if (TRUE) 
+                            // {
+                            //   // V�rifier que la r�f�rence saisie n'existe pas d�ja
+                            
+                            //   $requete="SELECT m.marque , m.modele , m.dimensionLongueur
+                            //   FROM materiel m
+                            //   where ".$RefMat." NOT IN (SELECT e.id FROM emprunt e where e.Date_Fin_Empr is null )
+                            //   or m.id not in(SELECT emprunt.id FROM emprunt);"; 
+                            //   echo $requete;
+                            //   $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+
+                            //   $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le résultat soit récup�rable sous forme d'objet     
+                              
+                            //   $ligne = $jeuResultat->fetch();
+                            //   if($ligne)
+                            //   {
+                                
+                            //         $message = "Le visiteur a été correctement ajoutée";
+                            //         ajouterErreur($tabErr, $message);
+                              
+                            //   }
+                            //   else
+                            //   {
+                                
+                            //       $message="Echec de l'emprunt : le matériel est deja emprunter ";
+                            //       ajouterErreur($tabErr, $message);
+
+                            //   }
+                            //   // fermer la connexion
+                            //   // deconnecterServeurBD($idConnexion);
+                            // }
+                            // else
+                            // {
+                            //   $message = "problème à la connexion <br />";
+                            //   ajouterErreur($tabErr, $message);
+                            // }
 }
 
-// function lister($categ)
-// {
-//   $connexion = connecterServeurBD();
-  
-//   // Si la connexion au SGBD � r�ussi
-//   if (TRUE) 
-//   {
-      
-           
-//       $requete="select * from produit";
-//       if ($categ!="")
-//       {
-//           $requete=$requete." where pdt_categorie='".$categ."';";
-//       }
-      
-//       $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
 
-//       $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
-//       $i = 0;
-//       $ligne = $jeuResultat->fetch();
-//       while($ligne)
-//       {
-//           $visiteur[$i]['image']=$ligne->pdt_image;
-//           $visiteur[$i]['ref']=$ligne->pdt_ref;
-//           $visiteur[$i]['designation']=$ligne->pdt_designation;
-//           $visiteur[$i]['prix']=$ligne->pdt_prix;
-//           $ligne=$jeuResultat->fetch();
-//           $i = $i + 1;
-//       }
-//   }
-//   $jeuResultat->closeCursor();   // fermer le jeu de r�sultat
-//   // deconnecterServeurBD($idConnexion);
-//   return $visiteur;
-// }
 
 
 function listerUti($type_uti)
@@ -251,7 +369,8 @@ function rechercher($unNom, $unMail)
   $connexion = connecterServeurBD();
   
   // Si la connexion au SGBD � r�ussi
-      
+  if (TRUE) 
+  {  
            
     $requete="select * from visiteur";
     $requete=$requete." where Vis_mail='".$unMail."';";
@@ -268,11 +387,46 @@ function rechercher($unNom, $unMail)
         $ligne=$jeuResultat->fetch();
         $i = $i + 1;
     }
-
+  }
   $jeuResultat->closeCursor();   // fermer le jeu de r�sultat
   // deconnecterServeurBD($idConnexion);
   return $levisiteur;
   }
+
+  function rechercherMaterielle($unid, $unmodele)
+  {
+    $lemateriel=array();
+    $connexion = connecterServeurBD();
+    
+    // Si la connexion au SGBD � r�ussi
+    if (TRUE) 
+    { 
+             
+      $requete="select * from materiel";
+      $requete=$requete." where id='".$unid."';";
+      //echo $requete;    
+      $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+  
+      $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
+      $i = 0;
+      $ligne = $jeuResultat->fetch();
+      while($ligne)
+      {
+         $lemateriel[$i]['id']=$ligne->id;
+         $lemateriel[$i]['marque']=$ligne->marque;
+          $lemateriel[$i]['modele']=$ligne->modele;
+          $ligne=$jeuResultat->fetch();
+          $i = $i + 1;
+      }
+    }
+    $jeuResultat->closeCursor();   // fermer le jeu de r�sultat
+    // deconnecterServeurBD($idConnexion);
+    return $lemateriel;
+    }
+
+
+
+
   function recherchera($idVisiteur)
 {
 $connexion = connecterServeurBD();
@@ -306,10 +460,44 @@ $connexion = connecterServeurBD();
   // deconnecterServeurBD($idConnexion);
   return $levisiteur;
 }
+function rechercheraMateriel($id)
+{
+$connexion = connecterServeurBD();
+  
+  // Si la connexion au SGBD � r�ussi
+  if (TRUE) 
+  {
+      
+           
+      $requete="select * from materiel";
+      if ($id!="")
+      {
+          $requete=$requete." where id='".$id."';";
+      }
+      
+      $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+
+      $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
+      $i = 0;
+      $ligne = $jeuResultat->fetch();
+      while($ligne)
+      {
+          $lemateriel[$i]['id']=$ligne->id;
+          $lemateriel[$i]['marque']=$ligne->marque;
+          $lemateriel[$i]['modele']=$ligne->modele;
+          $lemateriel[$i]['dimensionLongueur']=$ligne->dimensionLongueur;
+          $ligne=$jeuResultat->fetch();
+          $i = $i + 1;
+      }
+  }
+  $jeuResultat->closeCursor();   // fermer le jeu de r�sultat
+  // deconnecterServeurBD($idConnexion);
+  return $lemateriel;
+}
 
 
-
-function ajouter($nom, $mail, &$tabErr)
+//ajouter un visiteur 
+function ajouterVisiteur($nom, $mail, &$tabErr)
 {
   // Ouvrir une connexion au serveur mysql en s'identifiant
   $connexion = connecterServeurBD();
@@ -320,7 +508,7 @@ function ajouter($nom, $mail, &$tabErr)
     // V�rifier que la r�f�rence saisie n'existe pas d�ja
     $requete="select * from visiteur";
     $requete=$requete." where Vis_mail = '".$mail."';"; 
-    echo $requete;
+    // echo $requete;
     $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
 
     $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le résultat soit récup�rable sous forme d'objet     
@@ -431,11 +619,108 @@ function ajouter($nom, $mail, &$tabErr)
     // V�rifier que la r�f�rence saisie n'existe pas d�ja
 
 
-
-    
-function modifierUti($unId,$unNom,$unMdp,$unMdpVerif,$unCat ,&$tabErr)
+//ajouter un visiteur 
+function ajouterMateriel($uneMarque, $unModel,$uneDimension,&$tabErr)
 {
-       // Ouvrir une connexion au serveur mysql en s'identifiant
+  // Ouvrir une connexion au serveur mysql en s'identifiant
+  $connexion = connecterServeurBD();
+  
+  // Si la connexion au SGBD � r�ussi
+  if (TRUE) 
+  {
+    // V�rifier que la r�f�rence saisie n'existe pas d�ja
+    $requete="select * from materiel";
+    $requete=$requete." where modele = '".$unModel."';"; 
+    // echo $requete;
+    $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+
+    $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le résultat soit récup�rable sous forme d'objet     
+    
+    $ligne = $jeuResultat->fetch();
+    if($ligne)
+    {
+      $message="Echec de l'ajout : la référence existe déja !";
+      ajouterErreur($tabErr, $message);
+    }
+    else
+    {
+      // Créer la requ�te d'ajout 
+       $requete="insert into materiel"
+       ."(marque,modele,dimensionLongueur) values ('"
+       .$uneMarque."','"
+       .$unModel."','"
+        .$uneDimension."');";
+      //  echo $requete;
+       
+        // Lancer la requ�te d'ajout 
+        $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+       
+        // Si la requ�te a r�ussi
+        if ($ok)
+        {
+          $message = "Le matériel a été correctement ajoutée";
+          ajouterErreur($tabErr, $message);
+        }
+        else
+        {
+          $message = "Attention, l'ajout du materiel a échoué !!!";
+          ajouterErreur($tabErr, $message);
+        } 
+
+    }
+    // fermer la connexion
+    // deconnecterServeurBD($idConnexion);
+  }
+  else
+  {
+    $message = "problème à la connexion <br />";
+    ajouterErreur($tabErr, $message);
+  }
+}
+
+function modifierMaterielle($ref, $marque, $dimension, $modele,&$tabErr)
+{
+  
+    // Ouvrir une connexion au serveur mysql en s'identifiant
+    $connexion = connecterServeurBD();
+    
+    // V�rifier que la r�f�rence saisie n'existe pas d�ja
+    $requete="select * from materiel";
+    $requete=$requete." where id = '".$ref."';";              
+   
+    $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+  
+    //$jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
+    
+    $ligne = $jeuResultat->fetch();
+    // Cr�er la requ�te de modification 
+  
+    $requete= "UPDATE materiel SET marque = '$marque',
+    `modele` = '$modele',
+    `dimensionLongueur` = '$dimension'
+     WHERE `id`='$ref';";
+         
+    // Lancer la requ�te d'ajout 
+    $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+      
+    // Si la requ�te a r�ussi
+    if ($ok)
+    {
+      $message = "Le materiel a été correctement modifier";
+      ajouterErreur($tabErr, $message);
+    }
+    else
+    {
+      $message = "Attention, la modification du materielle a echoué!!!";
+      ajouterErreur($tabErr, $message);
+    } 
+}
+
+ 
+function ajouterUti($unmail,$unNom,$unMdp,$unMdpVerif,$unCat,&$tabErr)
+{
+
+    // Ouvrir une connexion au serveur mysql en s'identifiant
   $connexion = connecterServeurBD();
   
   // Si la connexion au SGBD � r�ussi
@@ -443,8 +728,8 @@ function modifierUti($unId,$unNom,$unMdp,$unMdpVerif,$unCat ,&$tabErr)
   {
     if ($unMdpVerif==$unMdp)
     {
-              $requete="select * from utilisateur";
-            $requete=$requete." where id = '".$unId."';"; 
+              $requete="select * from visiteur";
+            $requete=$requete." where vis_mail = '".$unmail."';"; 
             $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
 
             $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
@@ -452,39 +737,33 @@ function modifierUti($unId,$unNom,$unMdp,$unMdpVerif,$unCat ,&$tabErr)
             $ligne = $jeuResultat->fetch();
             if($ligne)
             {
-               // Cr�er la requ�te d'ajout 
-              //  $requete="update utilisateur"
-              //  ."SET
-              //  id,nom,mdp,cat values ('"
-              //  .$unId."','"
-              //  .$unNom."',"
-              //  .$unMdp.",'"
-              //  .$unCat."')
-              // where id = '".$unId."'
-              //  ;";
-              $requete="update utilisateur SET id=".$unId.",nom='".$unNom."',mdp=".$unMdp.",cat='".$unCat."' where id = ".$unId.";";
-               echo $requete;
-                //  // Lancer la requ�te d'ajout 
-                 $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
-               
-                 // Si la requ�te a r�ussi
-                 if ($ok)
-                 {
-                   $message = "l utilisateur a �t� correctement modifier";
-                   ajouterErreur($tabErr, $message);
-                 }
-                 else
-                 {
-                   $message = "Attention, la modif  de l uti a �chou� !!!";
-                   ajouterErreur($tabErr, $message);
-                 } 
+              $message="Echec de l'ajout : l ID existe déja !";
+              ajouterErreur($tabErr, $message);
             }
             else
             {
-             
-
-                $message="Echec de l'ajout l ID n existe pas !";
-              ajouterErreur($tabErr, $message);
+              // Cr�er la requ�te d'ajout 
+              $requete="insert into visiteur"
+              ."(vis_mail,VIS_NOM,mdp,cat) values ('"
+              .$unmail."','"
+              .$unNom."',"
+              .$unMdp.",'"
+              .$unCat."');";
+              
+                // Lancer la requ�te d'ajout 
+                $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+              
+                // Si la requ�te a r�ussi
+                if ($ok)
+                {
+                  $message = "l utilisateur a été correctement ajoutée";
+                  ajouterErreur($tabErr, $message);
+                }
+                else
+                {
+                  $message = "Attention, l'ajout de l uti a échoué !!!";
+                  ajouterErreur($tabErr, $message);
+                } 
 
             }
             // fermer la connexion
@@ -499,12 +778,54 @@ function modifierUti($unId,$unNom,$unMdp,$unMdpVerif,$unCat ,&$tabErr)
     }
    
     // V�rifier que la r�f�rence saisie n'existe pas d�ja
+   
+//     // V�rifier que la r�f�rence saisie n'existe pas d�ja
+
+
+function modifierUti($ref, $nom, $prenom, $adresse, $cp, $ville, $sec_code, $lab_code,&$tabErr)
+{
+  
+    // Ouvrir une connexion au serveur mysql en s'identifiant
+    $connexion = connecterServeurBD();
+    
+    // V�rifier que la r�f�rence saisie n'existe pas d�ja
+    $requete="select * from visiteur";
+    $requete=$requete." where vis_id = '".$ref."';";              
+   
+    $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+  
+    //$jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
+    
+    $ligne = $jeuResultat->fetch();
+    // Cr�er la requ�te de modification 
+  
+    $requete= "UPDATE visiteur SET vis_adresse = '$adresse',
+    `vis_nom` = '$nom',
+    `vis_prenom` = '$prenom',
+    `vis_cp` = '$cp',
+    `vis_ville` = '$ville',
+    `sec_code`= '$sec_code',
+    `lab_code` = '$lab_code' WHERE `vis_id`='$ref';";
+         
+    // Lancer la requ�te d'ajout 
+    $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+      
+    // Si la requ�te a r�ussi
+    if ($ok)
+    {
+      $message = "L user a été modifié ";
+      ajouterErreur($tabErr, $message);
+    }
+    else
+    {
+      $message = "Attention, la modification de l user a échoué !!!";
+      ajouterErreur($tabErr, $message);
+    } 
+}
 
 
 
-
-
-
+//supprimer uti
 function supprimer($id, &$tabErr)
 {
     $connexion = connecterServeurBD();
@@ -530,13 +851,38 @@ function supprimer($id, &$tabErr)
     }      
 }
 
+function supprimerMaterielle($id, &$tabErr)
+{
+    $connexion = connecterServeurBD();
+    
+    $visiteur = array();
+          
+    $requete="delete from materiel";
+    $requete=$requete." where id='".$id."';";
+    
+    // Lancer la requ�te supprimer
+    $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+      
+    // Si la requ�te a r�ussi
+    if ($ok)
+    {
+      $message = "La materiel a été correctement supprimée";
+      ajouterErreur($tabErr, $message);
+    }
+    else
+    {
+      $message = "Attention, la suppression du matériel a échoué !!!";
+      ajouterErreur($tabErr, $message);
+    }      
+}
 
+//connexion
 function rechercherUtilisateur($log, $psw, &$tabErr)
 {
     $connexion = connecterServeurBD();
       
-    $requete="select * from utilisateur";
-      $requete=$requete." where nom='".$log."' and mdp ='".$psw."';";
+    $requete="select * from visiteur";
+      $requete=$requete." where Vis_mail='".$log."' and mdp ='".$psw."';";
     $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
   
     // Initialisationd e la cat�gorie trouv�e � : "aucune"

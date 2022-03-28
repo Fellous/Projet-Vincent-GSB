@@ -16,34 +16,124 @@
                 <a href="./indexzz.php">Accueil</a>
               </li>
               
+              <!-- <li class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">Visiteur <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="lister.php">Lister</a></li>
+                      <li><a href="ajouterUti.php">Ajouter</a></li>
+                      <li><a href="supprimer.php">Supprimer</a></li>
+                      <li><a href="rechercher.php">Rechercher</a></li>
+                      <li><a href="modifierUti.php">Modifier</a></li>
+                  </ul>
+              </li> -->
+             
+             
+             
+
+
+              <?php
+
+              // Si session administrateur
+              if (estVisiteurConnecte())
+              {
+
+                ?>
+
+              <li class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">Emprunt <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="emprunter.php">faire un emprunt</a></li>
+                      <li><a href="restituer.php">restituer</a></li>
+                      <li><a href="listerMaterielDispo.php">Liste disponible</a></li>
+                     
+                  </ul>
+              </li>
               <li class="dropdown">
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">Visiteur <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                       <li><a href="lister.php">Lister</a></li>
-                      <li><a href="ajouter.php">Ajouter</a></li>
-                      <li><a href="supprimer.php">Supprimer</a></li>
+                      
                       <li><a href="rechercher.php">Rechercher</a></li>
-                      <li><a href="modifier.php">Modifier</a></li>
+                    
                   </ul>
               </li>
               <li class="dropdown">
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">Matériel <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                      
-                      <li><a href="ajouterMateriel.php">Ajouter</a></li>
-                      <li><a href="supprimerM.php">Supprimer</a></li>
-                      <li><a href="rechercherM.php">Rechercher</a></li>
-                      <li><a href="modifierM.php">Modifier</a></li>
-                  </ul>
-              </li>
-              <li class="dropdown">
-                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">Emprunt <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                      <li><a href="emprunter.php">faire un emprunt</a></li>
-                      <li><a href="listerMaterielDispo.php">Liste disponible</a></li>
+                     
+                      <li><a href="rechercherMateriel.php">Rechercher</a></li>
                      
                   </ul>
               </li>
+              <li class="nav">
+                 <a href="deconnecter.php" >Deconnecter</a> 
+              </li>
+              <?php
+                }
+
+                    if ( estAdministrateurConnecte())
+                    {
+                      ?>
+                       <li class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">Matériel <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                     
+                      <li><a href="ajouterMateriel.php">Ajouter</a></li>
+                      <li><a href="supprimerMaterielle.php">Supprimer</a></li>
+                      <li><a href="rechercherMateriel.php">Rechercher</a></li>
+                      <li><a href="modifierMateriel.php">Modifier</a></li>
+                  </ul>
+              </li>
+              <li class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">Visiteur <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="lister.php">Lister</a></li>
+                      <li><a href="ajouterUti.php">Ajouter</a></li>
+                      <li><a href="supprimer.php">Supprimer</a></li>
+                      <li><a href="rechercher.php">Rechercher</a></li>
+                      <li><a href="modifierUti.php">Modifier</a></li>
+                  </ul>
+              </li>
+              <li class="nav">
+                 <a href="deconnecter.php" >Deconnecter</a> 
+              </li>
+              
+
+
+
+
+
+
+
+
+
+
+
+                <?php
+                }
+
+                // Si aucune connection n'est en cours, proposer l'inscription et l'identification
+                if (!estConnecte())
+                {
+                ?>
+                 <li class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">identification <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                      
+                      <li><a href="ajouterUti.php">Inscription</a></li>
+                      <li><a href="connecter.php">Connexion</a></li>
+                     
+                  </ul>
+              </li>
+
+              <?php
+              }   
+              ?> 
+
+
+
+
 <!--                                          
               <li class="nav">
                 <a href="lister.php?categ=bul">Bulbes</a>

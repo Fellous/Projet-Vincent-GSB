@@ -10,6 +10,11 @@ $repVues = './vues/';
 
 require($repInclude . "_init.inc.php");
   
+// $uneRef=lireDonneePost("ref", "");
+//$uneDes=lireDonneePost("des", "");
+//$unPrix=lireDonneePost("prix", "");
+//$uneImage=lireDonneePost("image", "");
+//$uneCat=lireDonneePost("cat", "");
 
 if (count($_POST)==0)
 {
@@ -17,17 +22,14 @@ if (count($_POST)==0)
 }
 else
 {
-  $etape = 2;  
-  $idVis=$_POST["idVis"];
-  $RefMat=$_POST["RefMat"];
-  $DateEmprunt=$_POST["DateEmprunt"];
-  emprunter($idVis,$RefMat,$DateEmprunt, $tabErreurs);
-  if (nbErreurs($tabErreurs)==0)
-  {
-    $reussite = 1;
-    $messageActionOk = "Le materiel a bien été emprunter";
-  }
-
+  $etape = 2;
+  $unmail=$_POST["mail"];
+   $unNom=$_POST["nom"];
+   $unMdp=$_POST["mdp"];
+   $unMdpVerif=$_POST["mdpVerif"];
+   $unCat=$_POST["cat"];
+   
+  ajouterUti($unmail,$unNom,$unMdp,$unMdpVerif,$unCat ,$tabErreurs);
 }
 
 // Construction de la page Rechercher
@@ -35,11 +37,7 @@ else
 include($repVues."entete.php") ;
 include($repVues."menu.php") ;
 include($repVues ."erreur.php");
-if ($etape==1)
-{
-  include($repVues."vEmprunter.php"); ;
-}
-
+include($repVues."vAjouterFormUti.php") ;
 include($repVues."pied.php") ;
 ?>
   

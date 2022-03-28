@@ -21,9 +21,9 @@ function valider(){
 <!--Saisie des informations dans un formulaire!-->
 <div class="container">
 
-<form name="formAjout" action="" method="post" onSubmit="return valider()">
+<form name="formAjoutMateriel" action="" method="post" onSubmit="return valider()">
   <fieldset>
-    <legend>Entrez les données sur le visiteur à ajouter </legend>
+    <legend>Entrez les données sur le materiel à ajouter </legend>
     <label>Marque :</label> <input type="text" name="marque" size="10" /><br />
     <label>Model :</label> <input type="text" name="model" size="10" /><br>
     <label>Dimension Longueur :</label> <input type="text" name="dimensionL" size="10" /><br>

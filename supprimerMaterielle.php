@@ -18,14 +18,12 @@ if (count($_POST)==0)
 else
 {
   $etape = 2;  
-  $idVis=$_POST["idVis"];
-  $RefMat=$_POST["RefMat"];
-  $DateEmprunt=$_POST["DateEmprunt"];
-  emprunter($idVis,$RefMat,$DateEmprunt, $tabErreurs);
+  $unId=$_POST["id"];
+  supprimerMaterielle($unId, $tabErreurs);
   if (nbErreurs($tabErreurs)==0)
   {
     $reussite = 1;
-    $messageActionOk = "Le materiel a bien été emprunter";
+    $messageActionOk = "Le matériel a bien été supprimée";
   }
 
 }
@@ -37,7 +35,7 @@ include($repVues."menu.php") ;
 include($repVues ."erreur.php");
 if ($etape==1)
 {
-  include($repVues."vEmprunter.php"); ;
+  include($repVues."vSupprimerMaterielle.php"); ;
 }
 
 include($repVues."pied.php") ;

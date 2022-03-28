@@ -18,14 +18,14 @@ function initSession() {
 /**
  * Conserve en variables session les informations du visiteur connecté
  * 
- * Conserve en variables session le nom et le mot de passe du visiteur connecté
- * @param string $nom  visiteur
+ * Conserve en variables session le mail et le mot de passe du visiteur connecté
+ * @param string $mail  visiteur
  * @param string $mdp du visiteur
  * @param string $cat du visiteur
  * @return void    
  */
-function connecter($nom, $mdp, $cat) {
-    $_SESSION["nom"] = $nom;
+function connecter($mail, $mdp, $cat) {
+    $_SESSION["mail"] = $mail;
     $_SESSION["mdp"] = $mdp;
     $_SESSION["cat"] = $cat;
     
@@ -37,7 +37,7 @@ function connecter($nom, $mdp, $cat) {
  * @return void
  */
 function deconnecter() {
-    unset($_SESSION["nom"]);
+    unset($_SESSION["mail"]);
     unset($_SESSION["mdp"]);
     unset($_SESSION["cat"]);
 }
@@ -50,7 +50,7 @@ function deconnecter() {
  */
 function estConnecte() {
     // actuellement il n'y a que les visiteurs qui se connectent
-    return isset($_SESSION["nom"]);
+    return isset($_SESSION["mail"]);
 }
 
 /** 
@@ -62,7 +62,7 @@ function estConnecte() {
 function estVisiteurConnecte() 
 {
     $connecte = false;
-    if (isset($_SESSION["nom"]))
+    if (isset($_SESSION["mail"]))
     {
         if ($_SESSION["cat"]=="client")
         {
@@ -75,7 +75,7 @@ function estVisiteurConnecte()
 // function estAdminConnecte() 
 // {
 //     $connecte = false;
-//     if (isset($_SESSION["nom"]))
+//     if (isset($_SESSION["mail"]))
 //     {
 //         if ($_SESSION["cat"]=="admin")
 //         {
@@ -95,7 +95,7 @@ function estVisiteurConnecte()
 function estAdministrateurConnecte() 
 {
     $connecte = false;
-    if (isset($_SESSION["nom"]))
+    if (isset($_SESSION["mail"]))
     {
         if ($_SESSION["cat"]=="admin")
         {

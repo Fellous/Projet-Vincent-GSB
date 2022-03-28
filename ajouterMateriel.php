@@ -30,10 +30,11 @@ if (count($_POST)==0)
 else
 {
   $etape = 2;
-   $unNom=$_POST["nom"];
-   $unMail=$_POST["mail"];
+   $uneMarque=$_POST["marque"];
+   $unModel=$_POST["model"];
+   $uneDimension=$_POST["dimensionL"];
     
-  ajouter($unNom, $unMail,$tabErreurs);
+  ajouterMateriel($uneMarque, $unModel,$uneDimension,$tabErreurs);
 }
 
 // Construction de la page Rechercher
